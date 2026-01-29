@@ -5,11 +5,13 @@
     {
       "slug": "onboarding",
       "name": "Getting Started",
-      "description": "A minimal project demonstrating core Loxtep concepts",
+      "description": "A minimal e-commerce project demonstrating core Loxtep concepts: domains, connectors, connections, pipelines, and data products",
       "path": "demos/onboarding",
-      "tags": ["beginner", "tutorial"],
+      "industry": "retail_ecommerce",
+      "tags": ["beginner", "tutorial", "e-commerce"],
       "entities": {
         "domains": 1,
+        "connectors": 1,
         "connections": 1,
         "pipelines": 1,
         "data_products": 1
@@ -17,7 +19,7 @@
     }
   ],
   "blueprints": {
-    "pipelines": [],
+    
     "connectors": [
       {
         "slug": "shopify",
@@ -60,6 +62,44 @@
         "category": "custom"
       }
     ],
+    "pipelines": [
+      {
+        "slug": "webhook-ingestion",
+        "name": "Webhook Ingestion Pipeline",
+        "description": "Receive events via HTTP POST webhook",
+        "path": "blueprints/pipelines/webhook-ingestion.json",
+        "tags": ["webhook", "http", "real-time", "events"]
+      },
+      {
+        "slug": "api-polling",
+        "name": "API Polling Pipeline",
+        "description": "Poll external REST APIs on a schedule",
+        "path": "blueprints/pipelines/api-polling.json",
+        "tags": ["api", "polling", "scheduled", "rest"]
+      },
+      {
+        "slug": "database-cdc",
+        "name": "Database CDC Pipeline",
+        "description": "Capture database changes using Change Data Capture",
+        "path": "blueprints/pipelines/database-cdc.json",
+        "tags": ["database", "cdc", "real-time", "replication"]
+      },
+      {
+        "slug": "file-import",
+        "name": "File Import Pipeline",
+        "description": "Import data from files (CSV, JSON, Parquet)",
+        "path": "blueprints/pipelines/file-import.json",
+        "tags": ["file", "batch", "s3", "import"]
+      },
+      {
+        "slug": "streaming-transform",
+        "name": "Streaming Transform Pipeline",
+        "description": "Apply real-time transformations to streaming data",
+        "path": "blueprints/pipelines/streaming-transform.json",
+        "tags": ["streaming", "transform", "real-time", "enrichment"]
+      }
+    ],
+    
     "connections": [],
     "transforms": [],
     "consumption": []

@@ -53,19 +53,19 @@ jobs:
       - name: Check required directories
         run: |
           echo "Checking required directories..."
-          
+
           # Check demos directory exists
           if [ ! -d "demos" ]; then
             echo "❌ Missing demos/ directory"
             exit 1
           fi
-          
+
           # Check blueprints directory exists
           if [ ! -d "blueprints" ]; then
             echo "❌ Missing blueprints/ directory"
             exit 1
           fi
-          
+
           # Check blueprint subdirectories
           for dir in pipelines connectors connections transforms consumption; do
             if [ ! -d "blueprints/$dir" ]; then
@@ -73,24 +73,24 @@ jobs:
               exit 1
             fi
           done
-          
+
           echo "✅ All required directories present"
 
       - name: Check demo structure
         run: |
           echo "Checking demo project structures..."
-          
+
           for demo in demos/*/; do
             if [ -d "$demo" ]; then
               demo_name=$(basename "$demo")
               echo "Checking demo: $demo_name"
-              
+
               # Check for .loxtep/project.json
               if [ ! -f "${demo}.loxtep/project.json" ]; then
                 echo "❌ Demo '$demo_name' missing .loxtep/project.json"
                 exit 1
               fi
-              
+
               echo "✅ Demo '$demo_name' has valid structure"
             fi
           done
@@ -98,7 +98,7 @@ jobs:
       - name: Validate placeholder usage in blueprints
         run: |
           echo "Checking blueprint placeholder usage..."
-          
+
           # Check that blueprints use ID placeholders, not hardcoded UUIDs
           find blueprints -name "*.json" | while read file; do
             # Check for UUID pattern that should be a placeholder
@@ -107,5 +107,5 @@ jobs:
               echo "⚠️  Warning: $file contains hardcoded UUIDs - consider using placeholders"
             fi
           done
-          
+
           echo "✅ Blueprint placeholder check complete"
