@@ -19,6 +19,49 @@
     }
   ],
   "blueprints": {
+    
+    "connectors": [
+      {
+        "slug": "shopify",
+        "name": "Shopify Connector",
+        "description": "Connect to Shopify stores for orders, customers, products",
+        "path": "blueprints/connectors/shopify.json",
+        "tags": ["shopify", "e-commerce", "orders", "products"],
+        "category": "e_commerce"
+      },
+      {
+        "slug": "postgres",
+        "name": "PostgreSQL Connector",
+        "description": "PostgreSQL database with CDC and query support",
+        "path": "blueprints/connectors/postgres.json",
+        "tags": ["postgres", "database", "cdc", "sql"],
+        "category": "database"
+      },
+      {
+        "slug": "webhook-catch",
+        "name": "Webhook Catch Connector",
+        "description": "Generic webhook endpoint for HTTP POST events",
+        "path": "blueprints/connectors/webhook-catch.json",
+        "tags": ["webhook", "http", "events", "generic"],
+        "category": "custom"
+      },
+      {
+        "slug": "s3-source",
+        "name": "S3 Source Connector",
+        "description": "Ingest files from Amazon S3 buckets",
+        "path": "blueprints/connectors/s3-source.json",
+        "tags": ["s3", "aws", "file", "batch"],
+        "category": "file_storage"
+      },
+      {
+        "slug": "rest-api",
+        "name": "REST API Connector",
+        "description": "Generic REST API connector for any HTTP JSON API",
+        "path": "blueprints/connectors/rest-api.json",
+        "tags": ["rest", "api", "http", "json"],
+        "category": "custom"
+      }
+    ],
     "pipelines": [
       {
         "slug": "webhook-ingestion",
@@ -56,7 +99,7 @@
         "tags": ["streaming", "transform", "real-time", "enrichment"]
       }
     ],
-    "connectors": [],
+    
     "connections": [],
     "transforms": [],
     "consumption": []
