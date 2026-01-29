@@ -5,11 +5,13 @@
     {
       "slug": "onboarding",
       "name": "Getting Started",
-      "description": "A minimal project demonstrating core Loxtep concepts",
+      "description": "A minimal e-commerce project demonstrating core Loxtep concepts: domains, connectors, connections, pipelines, and data products",
       "path": "demos/onboarding",
-      "tags": ["beginner", "tutorial"],
+      "industry": "retail_ecommerce",
+      "tags": ["beginner", "tutorial", "e-commerce"],
       "entities": {
         "domains": 1,
+        "connectors": 1,
         "connections": 1,
         "pipelines": 1,
         "data_products": 1
@@ -17,8 +19,85 @@
     }
   ],
   "blueprints": {
-    "pipelines": [],
-    "connectors": [],
+    "pipelines": [
+      {
+        "slug": "webhook-ingestion",
+        "name": "Webhook Ingestion Pipeline",
+        "description": "Receive events via HTTP POST webhook",
+        "path": "blueprints/pipelines/webhook-ingestion.json",
+        "tags": ["webhook", "http", "real-time", "events"]
+      },
+      {
+        "slug": "api-polling",
+        "name": "API Polling Pipeline",
+        "description": "Poll external REST APIs on a schedule",
+        "path": "blueprints/pipelines/api-polling.json",
+        "tags": ["api", "polling", "scheduled", "rest"]
+      },
+      {
+        "slug": "database-cdc",
+        "name": "Database CDC Pipeline",
+        "description": "Capture database changes using Change Data Capture",
+        "path": "blueprints/pipelines/database-cdc.json",
+        "tags": ["database", "cdc", "real-time", "replication"]
+      },
+      {
+        "slug": "file-import",
+        "name": "File Import Pipeline",
+        "description": "Import data from files (CSV, JSON, Parquet)",
+        "path": "blueprints/pipelines/file-import.json",
+        "tags": ["file", "batch", "s3", "import"]
+      },
+      {
+        "slug": "streaming-transform",
+        "name": "Streaming Transform Pipeline",
+        "description": "Apply real-time transformations to streaming data",
+        "path": "blueprints/pipelines/streaming-transform.json",
+        "tags": ["streaming", "transform", "real-time", "enrichment"]
+      }
+    ],
+    "connectors": [
+      {
+        "slug": "shopify",
+        "name": "Shopify Connector",
+        "description": "Connect to Shopify stores for orders, customers, products",
+        "path": "blueprints/connectors/shopify.json",
+        "tags": ["shopify", "e-commerce", "orders", "products"],
+        "category": "e_commerce"
+      },
+      {
+        "slug": "postgres",
+        "name": "PostgreSQL Connector",
+        "description": "PostgreSQL database with CDC and query support",
+        "path": "blueprints/connectors/postgres.json",
+        "tags": ["postgres", "database", "cdc", "sql"],
+        "category": "database"
+      },
+      {
+        "slug": "webhook-catch",
+        "name": "Webhook Catch Connector",
+        "description": "Generic webhook endpoint for HTTP POST events",
+        "path": "blueprints/connectors/webhook-catch.json",
+        "tags": ["webhook", "http", "events", "generic"],
+        "category": "custom"
+      },
+      {
+        "slug": "s3-source",
+        "name": "S3 Source Connector",
+        "description": "Ingest files from Amazon S3 buckets",
+        "path": "blueprints/connectors/s3-source.json",
+        "tags": ["s3", "aws", "file", "batch"],
+        "category": "file_storage"
+      },
+      {
+        "slug": "rest-api",
+        "name": "REST API Connector",
+        "description": "Generic REST API connector for any HTTP JSON API",
+        "path": "blueprints/connectors/rest-api.json",
+        "tags": ["rest", "api", "http", "json"],
+        "category": "custom"
+      }
+    ],
     "connections": [],
     "transforms": [],
     "consumption": []
