@@ -1,0 +1,111 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint File Names
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ls-lint
+        run: |
+          curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v2.2.2/ls-lint-linux
+          chmod +x ls-lint
+
+      - name: Run ls-lint
+        run: ./ls-lint
+
+  validate-json:
+    name: Validate JSON Files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Validating JSON files..."
+          find . -name "*.json" -not -path "./.git/*" | while read file; do
+            echo "Checking $file"
+            if ! python3 -m json.tool "$file" > /dev/null 2>&1; then
+              echo "❌ Invalid JSON: $file"
+              exit 1
+            fi
+          done
+          echo "✅ All JSON files are valid"
+
+  validate-structure:
+    name: Validate Project Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required directories
+        run: |
+          echo "Checking required directories..."
+          
+          # Check demos directory exists
+          if [ ! -d "demos" ]; then
+            echo "❌ Missing demos/ directory"
+            exit 1
+          fi
+          
+          # Check blueprints directory exists
+          if [ ! -d "blueprints" ]; then
+            echo "❌ Missing blueprints/ directory"
+            exit 1
+          fi
+          
+          # Check blueprint subdirectories
+          for dir in pipelines connectors connections transforms consumption; do
+            if [ ! -d "blueprints/$dir" ]; then
+              echo "❌ Missing blueprints/$dir/ directory"
+              exit 1
+            fi
+          done
+          
+          echo "✅ All required directories present"
+
+      - name: Check demo structure
+        run: |
+          echo "Checking demo project structures..."
+          
+          for demo in demos/*/; do
+            if [ -d "$demo" ]; then
+              demo_name=$(basename "$demo")
+              echo "Checking demo: $demo_name"
+              
+              # Check for .loxtep/project.json
+              if [ ! -f "${demo}.loxtep/project.json" ]; then
+                echo "❌ Demo '$demo_name' missing .loxtep/project.json"
+                exit 1
+              fi
+              
+              echo "✅ Demo '$demo_name' has valid structure"
+            fi
+          done
+
+      - name: Validate placeholder usage in blueprints
+        run: |
+          echo "Checking blueprint placeholder usage..."
+          
+          # Check that blueprints use ID placeholders, not hardcoded UUIDs
+          find blueprints -name "*.json" | while read file; do
+            # Check for UUID pattern that should be a placeholder
+            if grep -qE '"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"' "$file"; then
+              # Allow UUIDs in certain contexts, but warn
+              echo "⚠️  Warning: $file contains hardcoded UUIDs - consider using placeholders"
+            fi
+          done
+          
+          echo "✅ Blueprint placeholder check complete"

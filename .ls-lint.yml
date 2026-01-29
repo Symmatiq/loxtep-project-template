@@ -1,0 +1,21 @@
+# ls-lint configuration for loxtep-project-template
+# Enforces kebab-case naming for all files and directories
+
+ls:
+  .js: kebab-case
+  .json: kebab-case | point.case
+  .ts: kebab-case
+  .yml: kebab-case
+  .yaml: kebab-case
+  .md: kebab-case | PascalCase
+
+  demos:
+    .json: kebab-case
+    
+  blueprints:
+    .json: kebab-case
+
+ignore:
+  - .git
+  - node_modules
+  - .github

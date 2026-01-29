@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "description": "Loxtep project templates and component blueprints",
+  "demos": [
+    {
+      "slug": "onboarding",
+      "name": "Getting Started",
+      "description": "A minimal project demonstrating core Loxtep concepts",
+      "path": "demos/onboarding",
+      "tags": ["beginner", "tutorial"],
+      "entities": {
+        "domains": 1,
+        "connections": 1,
+        "pipelines": 1,
+        "data_products": 1
+      }
+    }
+  ],
+  "blueprints": {
+    "pipelines": [],
+    "connectors": [],
+    "connections": [],
+    "transforms": [],
+    "consumption": []
+  }
+}
