@@ -5,11 +5,13 @@
     {
       "slug": "onboarding",
       "name": "Getting Started",
-      "description": "A minimal project demonstrating core Loxtep concepts",
+      "description": "A minimal e-commerce project demonstrating core Loxtep concepts: domains, connectors, connections, pipelines, and data products",
       "path": "demos/onboarding",
-      "tags": ["beginner", "tutorial"],
+      "industry": "retail_ecommerce",
+      "tags": ["beginner", "tutorial", "e-commerce"],
       "entities": {
         "domains": 1,
+        "connectors": 1,
         "connections": 1,
         "pipelines": 1,
         "data_products": 1
