@@ -5,7 +5,7 @@
   "name": "Order Processing Pipeline",
   "description": "Processes incoming orders from the webhook connection. Validates order data, calculates totals, and enriches with timestamps before forwarding to the data product.",
   "connection_id": "{{CONNECTION_ID_1}}",
-  "template_id": "{{TEMPLATE_ID_WEBHOOK}}",
+  "template_id": null,
   "configuration": {
     "schedule": null,
     "batch_size": 100,
@@ -18,8 +18,9 @@
   "metadata": {
     "tags": ["orders", "processing", "e-commerce"],
     "ingestion_type": "webhook",
-    "expected_volume": "low"
+    "expected_volume": "low",
+    "is_demo": true
   },
-  "created_at": "2026-01-28T00:00:00Z",
-  "updated_at": "2026-01-28T00:00:00Z"
+  "created_at": "{{GENERATED_AT}}",
+  "updated_at": "{{GENERATED_AT}}"
 }
